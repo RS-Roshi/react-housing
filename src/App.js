@@ -1,24 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import Loader from './components/loader'
+import AppHeader from './components/header'
+import AppFooter from './components/footer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+import HomePage from './pages/home';
+import AboutPage from './pages/about';
+import ContactPage from './pages/contact';
+import BuilderPage from './pages/builder';
+import ProjectPage from './pages/project';
+import TeamPage from './pages/team';
+import ErrorPage from './pages/404';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Loader />
+      <AppHeader />
+
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/about" exact>
+          <AboutPage />
+        </Route>
+        <Route path="/contact" exact>
+          <ContactPage />
+        </Route>
+        <Route path="/builder" exact>
+          <BuilderPage />
+        </Route>
+        <Route path="/project" exact>
+          <ProjectPage />
+        </Route>
+        <Route path="/team" exact>
+          <TeamPage />
+        </Route>
+        <Route path="/not-found" >
+          <ErrorPage />
+        </Route>
+        <Redirect from="*" to='/not-found' />
+      </Switch>
+
+      <AppFooter />
+    </Router>
   );
 }
 
